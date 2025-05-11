@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Enrollment;
-use App\Models\Student;
 use App\Models\Batch;
+use App\Models\Student;
 use Illuminate\View\View;
 use PHPUnit\Framework\Constraint\Count;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
 
 class EnrollmentController extends Controller
 {
@@ -19,7 +18,7 @@ class EnrollmentController extends Controller
     public function index()
     {
         $enrolments = Enrollment::all();
-        return view ('enrollments.index')->with('enrollments', $enrolments);
+        return view('enrollments.index')->with('enrollments', $enrolments);
     }
 
     /**
@@ -29,7 +28,8 @@ class EnrollmentController extends Controller
     {
         $batches = Batch::pluck('name', 'id');
         $students = Student::pluck('name', 'id');
-        return view('admin.enrollments.create', compact('batches', 'students'));;
+
+        return view('enrollments.create', compact('batches', 'students'));
     }
 
     /**
@@ -39,7 +39,7 @@ class EnrollmentController extends Controller
     {
         $input = $request->all();
         Enrollment::create($input);
-        return redirect('enrollments')->with('flash_message', 'enrollment Addedd!');
+        return redirect('enrollments')->with('flash_message', 'enrollment Added!');
     }
 
     /**
@@ -68,7 +68,7 @@ class EnrollmentController extends Controller
         $enrolments = Enrollment::find($id);
         $input = $request->all();
         $enrolments->update($input);
-        return redirect('enrollments')->with('flash_message', 'enrollment Updated!');  
+        return redirect('enrollments')->with('flash_message', 'enrollment Updated!');
     }
 
     /**
@@ -77,6 +77,6 @@ class EnrollmentController extends Controller
     public function destroy(string $id)
     {
         Enrollment::destroy($id);
-        return redirect('enrollments')->with('flash_message', 'enrollment deleted!'); 
+        return redirect('enrollments')->with('flash_message', 'enrollment deleted!');
     }
 }
