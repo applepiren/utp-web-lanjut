@@ -12,7 +12,9 @@ class Payment extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['enrollment_id', 'paid_date', 'amount'];
 
-    public function enrollment(){
-        return $this->belongsTo(Enrollment::class);
-    }
+    public function enrollment()
+{
+    return $this->belongsTo(Enrollment::class);
+}
+
 }
